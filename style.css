@@ -1,9 +1,15 @@
 @charset "UTF-8";
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@300;500;600&display=swap");
+
 * {
   padding: 0;
   margin: 0;
+}
+
+body {
+  background-color: rgba(204, 204, 204, 0.103);
 }
 
 .container {
@@ -11,30 +17,92 @@
   margin: 0 auto;
 }
 
-/* CANEÇALHO */
+.container img {
+  width: 145px;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+main {
+  background-color: white;
+  border-radius: 5px;
+}
+
+/* CABEÇALHO */
 
 header {
   background-color: black;
-  height: 50px;
+  height: 80px;
 }
 
 .cabecalho h1 {
   color: white;
+  font-size: 30px;
   font-family: "Poppins", sans-serif;
 }
 
-h2 {
-  margin-top: 40px;
+.container-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 5px;
+}
+
+.menu {
+  display: inline-flex;
+}
+
+.menu li {
+  list-style: none;
+}
+.menu a {
+  text-decoration: none;
+  color: white;
+  padding-left: 30px;
+  font-size: 1em;
+  font-family: "Titillium Web", Sans-serif, Arial;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  padding-left: 10px;
+  font-size: 16px;
+  font-family: "Titillium Web", Sans-serif, Arial;
+}
+
+.subheader {
+  margin: 10px;
+  margin-top: 10px;
+  margin-top: 60px;
+  display: inline-block;
+  font-family: "Poppins", Sans-serif, Arial;
+}
+
+.subheader h3 {
+  padding: 5px;
+  height: 30px;
+}
+
+.subheader h3:hover {
+  background-color: #138f47c2;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post p {
+  color: #575555;
   font-size: 15px;
-  padding: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 15px;
+  font-family: "Titillium Web", Sans-serif, Arial;
 }
 
-p {
-  font: 15px;
-}
-
-.ultima {
-  background-color: darkgreen;
+.post *:hover {
+  color: #138f47c2 !important;
 }
 
 /* CORPO */
@@ -45,11 +113,71 @@ p {
   justify-content: center;
   flex-direction: column;
 }
+
 .linha {
   display: flex;
   flex-direction: row;
 }
+
 .post {
   flex: 1;
   margin: 20px;
+  cursor: pointer;
+}
+
+.post img {
+  width: 220px;
+  height: 180px;
+  border-radius: 8px;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  height: 60px;
+  margin-top: 40px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.rodape img {
+  width: 110px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 500px) {
+  .post img {
+    width: 150px;
+    height: 140px;
+  }
+  .cabecalho img {
+    width: 105px;
+  }
+  .containermenu {
+    padding: 5px;
+    height: 100%;
+  }
+
+  .menu a {
+    padding: 5px;
+    font-size: 15px;
+  }
+
+  .linha {
+    flex-wrap: wrap;
+  }
+  .post h1 {
+    padding-left: 0;
+    padding-top: 15px;
+  }
+  .post p {
+    padding-left: 0;
+  }
+
+  .rodape img {
+    width: 115px;
+    height: 45px;
+  }
 }
