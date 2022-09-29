@@ -2,7 +2,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@300;500;600&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -13,8 +13,9 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1270px;
   margin: 0 auto;
+  box-shadow: 0px 0px 5px 0px rgba(169, 169, 169, 0.322);
 }
 
 .container img {
@@ -94,31 +95,39 @@ h1 {
 
 .post p {
   color: #575555;
+  text-align: justify;
   font-size: 15px;
   padding-left: 10px;
-  padding-right: 10px;
   margin-top: 15px;
   font-family: "Titillium Web", Sans-serif, Arial;
 }
 
-.post *:hover {
+.post h1:hover {
   color: #138f47c2 !important;
 }
 
+.accordion-item-header p:hover {
+  color: #138f47d2;
+}
+
 /* CORPO */
+
 .corpo {
   display: flex;
+  flex-direction: column;
+  /*display: flex;
   margin: auto;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+*/
 }
 
 .linha {
   display: flex;
   flex-direction: row;
 }
-
 .post {
   flex: 1;
   margin: 20px;
@@ -147,7 +156,49 @@ footer {
   padding-bottom: 10px;
 }
 
+/* ACCORDION */
+
+.accordion-item {
+  padding: 5px;
+  border-radius: 0.5rem;
+}
+
+.accordion-item-header {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.accordion-item-header p {
+  font-size: 0.8rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+}
+
+.accordion-item-header.active::after {
+  transform: rotate(-89deg); /*Mudar a rotação da seta   */
+}
+
+.accordion-item-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.accordion-item-body-content {
+  line-height: 1.5rem;
+  text-indent: 20px;
+}
+
+.accordion-item-header.active + .accordion-item-body {
+  max-height: 200px;
+}
+
 @media (max-width: 500px) {
+  .accordion-item-header.active + .accordion-item-body {
+    max-height: 1000px;
+  }
   .post img {
     width: 150px;
     height: 140px;
@@ -172,6 +223,7 @@ footer {
     padding-left: 0;
     padding-top: 15px;
   }
+
   .post p {
     padding-left: 0;
   }
