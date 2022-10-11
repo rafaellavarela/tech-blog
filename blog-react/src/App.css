@@ -26,6 +26,42 @@ main {
   background-color: white;
   border-radius: 5px;
 }
+.modal {
+  height: 435px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 10px;
+  height: 60px;
+  padding: 10px;
+}
+
+.descricao {
+  height: 130px;
+}
+
+.adicionar {
+  background-color: black;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+h2 {
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+}
+.salvar {
+  height: 30px;
+  font-size: 20px;
+  padding-top: 10px;
+  border-radius: 5px 5px 5px 5px;
+  color: white;
+  background-color: chocolate;
+}
 
 /* CABEÇALHO */
 
@@ -133,14 +169,21 @@ h1 {
   cursor: pointer;
 }
 
+button {
+  background-color: white;
+  border: none;
+}
+
+button .salvar {
+  padding-left: 3px;
+  width: 100%;
+  background-color: black;
+}
+
 .post img {
   width: 220px;
   height: 180px;
   border-radius: 8px;
-}
-
-.open {
-  height: 300px;
 }
 
 footer {
@@ -194,13 +237,31 @@ footer {
   text-indent: 20px;
 }
 
-.active {
-  max-height: auto;
+.accordion-item-header.active + .accordion-item-body {
+  max-height: 200px;
 }
 
 @media (max-width: 500px) {
-  .accordion-item-header.activ {
-    max-height: auto;
+  .modal {
+    height: 290px;
+    width: 290px;
+    display: flex;
+    flex-direction: column;
+  }
+  button {
+    padding: 10px;
+  }
+
+  input {
+    height: 45;
+  }
+
+  .accordion-item-header.active {
+    max-height: 1000px;
+  }
+
+  .adicionar {
+    padding-top: 15px;
   }
   .post img {
     width: 150px;
