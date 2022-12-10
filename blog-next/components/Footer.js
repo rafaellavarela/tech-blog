@@ -2,14 +2,16 @@ import Image from "next/image";
 
 function Footer() {
   return (
-    <footer className="rodape">
-      <Image
-        src="/imagem/logo.png"
-        width="100px"
-        height="100%"
-        alt="Cidade a Noite"
-      ></Image>
-    </footer>
+    <div>
+      <footer className="rodape">
+        <Image
+          src="/imagem/logo.png"
+          width="130px"
+          height="60%"
+          alt="Tech Blog"
+        ></Image>
+      </footer>
+    </div>
   );
 }
 export default Footer;

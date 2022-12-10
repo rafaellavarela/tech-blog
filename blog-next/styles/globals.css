@@ -15,25 +15,28 @@ body {
 .container {
   max-width: 1270px;
   margin: 0 auto;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
-.container img {
-  width: 145px;
-  padding-top: 5px;
-  padding-left: 5px;
+.container::-webkit-scrollbar {
+  display: none;
 }
+
 main {
   background-color: white;
   border-radius: 5px;
 }
 .modal {
-  height: 435px;
-  width: 500px;
+  height: 500px;
+  width: 600px;
   display: flex;
   flex-direction: column;
 }
 
 input {
+  font-size: 1em;
+  border: none;
   margin: 10px;
   height: 60px;
   padding: 10px;
@@ -60,14 +63,30 @@ h2 {
   padding-top: 10px;
   border-radius: 5px 5px 5px 5px;
   color: white;
-  background-color: chocolate;
+  background-color: #333;
 }
-
+.linha img {
+  width: 250px;
+  height: 220px;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+.linha {
+  display: flex;
+  flex-direction: row;
+}
 /* CABEÇALHO */
 
 header {
   background-color: black;
   height: 80px;
+}
+
+.titulo-modal {
+  font-size: 20px;
+  text-shadow: 0px 0px 1px black;
+  text-align: center;
 }
 
 .cabecalho h1 {
@@ -78,6 +97,7 @@ header {
 
 .container-menu {
   display: flex;
+
   justify-content: space-between;
   align-items: flex-end;
   padding: 5px;
@@ -90,59 +110,66 @@ header {
 .menu li {
   list-style: none;
 }
+
 .menu a {
+  color: #fff;
+  font-size: 20px;
+  background-color: #000;
   text-decoration: none;
-  color: white;
-  padding-left: 30px;
-  font-size: 1em;
   font-family: "Titillium Web", Sans-serif, Arial;
+  padding: 10px;
+  transition: 0.4s;
+  border-bottom: 2px solid transparent;
 }
-a:hover {
-  text-decoration: underline;
+
+.menu a:hover {
+  border-color: #fff;
+}
+
+.img_menu {
+  margin: 0;
 }
 
 h1 {
   padding-left: 10px;
-  font-size: 16px;
+  font-size: 1.5em;
+  margin-right: 0.4em;
   font-family: "Titillium Web", Sans-serif, Arial;
 }
 
+.subheader h3 {
+  margin: auto;
+}
+
 .subheader {
-  margin: 10px;
-  margin-top: 10px;
+  margin-left: 20px;
+
   margin-top: 60px;
   display: inline-block;
   font-family: "Poppins", Sans-serif, Arial;
 }
 
-.subheader h3 {
-  padding: 5px;
-  height: 30px;
-}
-
-.subheader h3:hover {
+.subheader:hover {
   background-color: #138f47c2;
-  color: white;
-  padding: 5px;
-  border-radius: 4px;
-  cursor: pointer;
+  color: #fff;
+
+  transform: scale(1.1);
+  background-position: -60px;
 }
 
 .post p {
-  color: #575555;
   text-align: justify;
-  font-size: 15px;
+  font-size: 17px;
+  line-height: 1.5em;
+  margin-right: 3.4em;
+  color: rgba(87, 83, 83, 0.907);
   padding-left: 10px;
   margin-top: 15px;
   font-family: "Titillium Web", Sans-serif, Arial;
 }
 
 .post h1:hover {
-  color: #138f47c2 !important;
-}
-
-.accordion-item-header p:hover {
-  color: #138f47d2;
+  color: #138f47c2;
 }
 
 /* CORPO */
@@ -159,13 +186,10 @@ h1 {
 */
 }
 
-.linha {
-  display: flex;
-  flex-direction: row;
-}
 .post {
   flex: 1;
   margin: 20px;
+  display: flex;
   cursor: pointer;
 }
 
@@ -180,21 +204,22 @@ button .salvar {
   background-color: black;
 }
 
-.post img {
-  width: 220px;
+.link {
   height: 180px;
-  border-radius: 8px;
+  padding-left: 10px;
 }
 
-footer {
+.rodape {
   background-color: black;
-  color: white;
-  height: 50px;
-  margin-top: 40px;
-  padding: 10px;
+  border-top: 1px solid #333;
+  bottom: 0;
+  left: 0;
+  height: 80px;
   display: flex;
-  text-align: center;
+  align-items: center;
   justify-content: center;
+  /* position: fixed; */
+  width: 100%;
 }
 
 .rodape img {
@@ -202,11 +227,9 @@ footer {
   padding-top: 5px;
   padding-bottom: 10px;
 }
-
-/* ACCORDION */
-
 .accordion-item {
-  padding: 5px;
+  padding: 10px;
+  margin: 0 auto;
   border-radius: 0.5rem;
 }
 
@@ -218,43 +241,53 @@ footer {
   cursor: pointer;
 }
 
-.accordion-item-header p {
-  font-size: 0.8rem;
-  font-family: "Poppins", sans-serif;
-  font-weight: normal;
-}
-
-.accordion-item-header.active::after {
-  transform: rotate(-89deg); /*Mudar a rotação da seta   */
-}
-
 .accordion-item-body {
   max-height: 0;
   overflow: hidden;
+
   transition: max-height 0.2s ease-out;
 }
 .accordion-item-body-content {
-  line-height: 1.5rem;
-  text-indent: 20px;
+  text-indent: 10px;
+}
+.accordion-item-body-content p {
+  color: rgba(0, 0, 0, 0.733);
+  font-size: 1.2em;
 }
 
 .accordion-item-header.active + .accordion-item-body {
-  max-height: 200px;
+  max-height: 300px;
 }
 
 @media (max-width: 500px) {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  .post {
+    margin: 0;
+  }
   .modal {
     height: 290px;
     width: 290px;
     display: flex;
     flex-direction: column;
   }
-  button {
-    padding: 10px;
+
+  input:focus-within {
+    outline-color: black;
   }
 
-  input {
-    height: 45;
+  .menu button {
+    background-color: #000;
+  }
+  .menu {
+    display: inline-flex;
+    margin-right: 1.3em;
+  }
+  .post p {
+    font-size: 14px;
+    line-height: 1.1em;
   }
 
   .accordion-item-header.active {
@@ -268,9 +301,7 @@ footer {
     width: 150px;
     height: 140px;
   }
-  .cabecalho img {
-    width: 105px;
-  }
+
   .containermenu {
     padding: 5px;
     height: 100%;
@@ -281,16 +312,27 @@ footer {
     font-size: 15px;
   }
 
-  .linha {
-    flex-wrap: wrap;
+  .linha img {
+    width: 150px;
+    height: 165px;
   }
+
   .post h1 {
     padding-left: 0;
     padding-top: 15px;
+    font-size: 20px;
+  }
+
+  .subheader {
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 
   .post p {
     padding-left: 0;
+    margin-right: 0.4em;
+    margin-top: 5px;
+    font-size: 15px;
   }
 
   .rodape img {

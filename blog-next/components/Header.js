@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import Image from "next/image";
+import Link from "next/link";
 
 const customStyles = {
   content: {
@@ -17,68 +18,102 @@ function Header(props) {
   const [titulo, setTitulo] = useState("");
   const [subtitulo, setSubtitulo] = useState("");
   const [descricao, setDescricao] = useState("");
+  const [imagem, setImagem] = useState("");
+
+  //Definindo a função para quando abrir o modal apareça o texto
+  useEffect(() => {
+    if (props.noticia) {
+      setDescricao(props.noticia.descricao);
+      setTitulo(props.noticia.titulo);
+      setSubtitulo(props.noticia.subtitulo);
+      setImagem(props.noticia.imagem);
+    }
+  }, [props.noticia]);
+
   return (
     <header className="cabecalho">
       <div className="container">
         <div className="container-menu">
           <Image
+            className="img_menu"
             src="/imagem/logo.png"
-            width="150px"
-            height="60%"
-            alt="logo"
+            width="145px"
+            height="60px"
+            alt="Logo"
           ></Image>
           <ul className="menu">
             <li>
-              <a>Notícias</a>
+              <a href="/">Home</a>
             </li>
             <li>
-              {" "}
-              <a>Vídeos</a>
-            </li>
-            <li>
-              {" "}
-              <a>Contato</a>
-            </li>
-
-            {/* <li>
               <button
-                className="adicionar"
-                onClick={() => props.setAbrirModal(true)}
+                onClick={() => {
+                  props.setAbrirModal(true);
+                }}
               >
                 {/* aqui esta definido a invocação de uma função que recebi por props la no header */}
-            {/* <p>Adicionar Noticia</p>
+                <a>Adicionar Noticia</a>
               </button>
-            </li> */}
+            </li>
           </ul>
         </div>
       </div>
 
       <Modal
         isOpen={props.abrirModal}
-        onRequestClose={() => props.setAbrirModal(false)}
+        onRequestClose={() => {
+          props.setNoticia({});
+          props.setAbrirModal(false);
+        }}
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2>Adicionar Noticia</h2>
+        <div className="titulo-modal">
+          <h1>Adicionar Noticia</h1>
+        </div>
 
         <form className="modal">
           <input
-            onchange={(evento) => setTitulo(evento.target.value)}
+            value={titulo}
+            onChange={(evento) => setTitulo(evento.target.value)}
             placeholder="Titulo"
           ></input>
           <input
+            value={subtitulo}
             onChange={(evento) => setSubtitulo(evento.target.value)}
-            placeholder="Subtitulo"
+            placeholder="Subtítulo"
           ></input>
           <input
+            value={descricao}
             onChange={(evento) => setDescricao(evento.target.value)}
             className="descricao"
             placeholder="Descrição"
           ></input>
+          <input
+            value={imagem}
+            onChange={(evento) => setImagem(evento.target.value)}
+            className="link"
+            placeholder="Link da Imagem"
+          ></input>
+
           {/* propriedade onChange dentro do input vai gerar eventos do usuario digitando  */}
           <button
-            onClick={() => {
-              props.adicionarNoticia(titulo, descricao, subtitulo);
+            onClick={(e) => {
+              e.preventDefault();
+              console.log(props.noticia);
+              //If para não repostar a materia novamente
+              if (props.noticia.id) {
+                props.editarNoticia(
+                  props.noticia.id,
+                  titulo,
+                  subtitulo,
+                  descricao,
+                  imagem
+                );
+              } else {
+                props.adicionarNoticia(titulo, descricao, subtitulo, imagem);
+              }
+
               props.setAbrirModal(false);
             }}
           >

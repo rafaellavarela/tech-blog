@@ -7,15 +7,23 @@ import Footer from "../components/Footer";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const api = axios.create({
+  baseURL: "http://localhost:3000/api",
+});
+
 export default function Home() {
   const [dados, setDados] = useState([]);
   const [noticiaId, setNoticiaId] = useState("0");
+  const [abrirModal, setAbrirModal] = useState(false);
+  // criar um objeto para qdo clicar na noticia o valor inicial deve ser {}
+  const [noticia, setNoticia] = useState({}); // vai
 
   useEffect(() => {
-    buscarUser();
+    buscarNoticia();
   }, []);
-  async function buscarUser() {
-    const { data } = await axios.get("http://localhost:3000/api/dados");
+
+  async function buscarNoticia() {
+    const { data } = await api.get("/dados");
     console.log(data);
     setDados(data);
   }
@@ -27,10 +35,46 @@ export default function Home() {
     }
     setNoticiaId(index);
   };
+
+  async function excluirNoticia(id) {
+    console.log({ id });
+    await api.delete(`/dados?id=${id}`); // deletar
+    const excluir = dados.filter((post) => post.id !== id); //  aqui esta filtrando todos os posts diferente dos id passado.
+    setDados(excluir);
+    buscarNoticia();
+  }
+
+  async function adicionarNoticia(titulo, descricao, subtitulo, imagem) {
+    const novaNoticia = { titulo, descricao, subtitulo, imagem };
+    await api.post("/dados", novaNoticia); //Post inserir
+    setDados([...dados, novaNoticia]);
+    buscarNoticia();
+  }
+
+  // criar uma função para não adicionar a materia que ja esta cadastrada
+  async function editarNoticia(id, titulo, descricao, subtitulo, imagem) {
+    const materiaeditar = { titulo, subtitulo, descricao, imagem };
+    await api.put(`/dados?id=${id}`, materiaeditar); // PUT atualizar
+    buscarNoticia();
+    setNoticia({});
+  }
+
+  //criar uma função que abra o modal e receba o post clicado por parametro
+  function abrirModalEBuscarPostClicado(post) {
+    setNoticia({});
+    //  Passando post pra quando clicar aparecer toda as informações para serem alteradas
+    setAbrirModal(true);
+    setNoticia(post); //vai receber o post
+
+    //abrir o modal com
+    //quando receber o post guardar no state criado la em cima
+  }
+
   if (dados.length === 0) return null;
   return (
     <div>
       <Head>
+        <title>Tech-Blog</title>
         <link
           rel="icon"
           type="img/png"
@@ -40,11 +84,13 @@ export default function Home() {
       </Head>
 
       <Header
-      // adicionarNoticia={adicionarNoticia}
-      // setAbrirModal={setAbrirModal}
-      // abrirModal={abrirModal}
+        editarNoticia={editarNoticia}
+        adicionarNoticia={adicionarNoticia}
+        setAbrirModal={setAbrirModal}
+        abrirModal={abrirModal}
+        setNoticia={setNoticia}
+        noticia={noticia} //passar os valores do post para o formulario
       />
-
       <main className="container">
         <div className="subheader">
           <h3>ÚLTIMAS MATÉRIAS</h3>
@@ -56,8 +102,10 @@ export default function Home() {
               key={index}
               id={post.id}
               mostrarNoticia={mostrarNoticia}
-              excluirNoticia={() => {}}
+              excluirNoticia={excluirNoticia}
+              abrirModalEBuscarPostClicado={abrirModalEBuscarPostClicado}
               index={index}
+              post={post}
               active={noticiaId === index}
               imagem={post.imagem}
               titulo={post.titulo}
